@@ -17,6 +17,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/admin/admin.module').then(m => m.AdminModule)
   },
+  { path: 'person', loadChildren: () => import('./features/person/person.module').then(m => m.PersonModule) },
   {
     path: '**',
     redirectTo: 'home'
