@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
-import { catchError, retry, switchMap } from 'rxjs/operators';
+import { catchError, retry, switchMap, map } from 'rxjs/operators';
 import { environment } from 'projects/my-epic-app/src/environments/environment';
 import { config } from '../../../config/global';
 @Injectable({
@@ -13,20 +13,20 @@ export class CommunicatorService {
 
   request(uri: string, method: string, payload?: any): Observable<any> {
     const options: any = {
-      headers: {},
-      withCredentials: true,
       observe: 'response',
       body: payload
     };
 
 
-    const url = `${environment.server} ${config.api.endpoint} ${uri}`;
+    const url = `${environment.server}${config.api.endpoint}${uri}/`;
     return this.http.request(method, url, options)
-      .pipe(switchMap((result: any, index: number): Observable<any> => {
-        return of(result);
+      .pipe(map((result: any, index: number): Observable<any> => {
+        return result;
       }),
         catchError((res: any, caughht: Observable<any>): Observable<any> => {
+          console.log("the val", res);
           return of(false);
+
         })
       )
 

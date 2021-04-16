@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [MainLayoutComponent],
@@ -18,6 +19,9 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
     // material
     MatToolbarModule,
     MatButtonModule
+  ],
+  providers: [
+    DecimalPipe
   ],
   exports: [MainLayoutComponent]
 })

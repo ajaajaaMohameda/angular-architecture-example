@@ -10,11 +10,9 @@ export class AppComponent {
   title = 'my-epic-app';
 
   constructor(private personService: PersonService) {
-
-  }
-  ngOninit() {
     this.personService.get().subscribe(res => {
       console.log("the res", res);
     })
+
   }
 }

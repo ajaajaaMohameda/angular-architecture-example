@@ -6,7 +6,7 @@ import { BehaviorSubject, Subject, Observable, of } from 'rxjs';
 import { State } from '../../model/state';
 import { SearchResult } from '../../model/searchResult';
 import { DecimalPipe } from '@angular/common';
-import { tap, debounceTime, switchMap, delay } from 'rxjs/operators';
+import { tap, debounceTime, switchMap, delay, map } from 'rxjs/operators';
 import { CommunicatorService } from '../communicator/communicator.service';
 
 @Injectable({
@@ -95,7 +95,9 @@ export class PersonService {
   }
 
   get(): Observable<any> {
-    const uri = '/people';
-    return this.communicatorService.get(uri);
+    const uri = 'people';
+    return this.communicatorService.get(uri).pipe(
+      map(res => res.body ? res.body['results']: null)
+    );
   }
 }
