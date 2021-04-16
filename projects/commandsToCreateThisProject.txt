@@ -1,0 +1,66 @@
+1 - Install angular cli
+  npm i -g @angular/cli
+
+1 - generate fresh new Angular workspace and this can be achieved by running
+
+    ng new angular-architecture-example --create-application false --strict
+--create-application false will create an empty workspace
+--strict will adjust the values of some Typescript compiler flags to nudge us to do the right things
+3 - exploring list of all available schematics
+
+4- create application
+ng g application my-epic-app --prefix my-org --style scss --routing
+
+5 add Angular material
+  ng add @angular/material
+
+6- add prettier
+  npm i -D prettier
+  create .prettierrc and put
+  {"singleQuote": true}
+7- add tslint (provided by angular cli) with prettier
+  npm i -D tslint-config-prettier
+  add in tslint.json {
+    extends: ["tslint:recommended", "tslint-config-prettier"]
+  }
+
+8 - add formatting scripts in package.json
+   "format:write": "prettier \"projects/**/*.{ts,json,md,scss}\" --write",
+    "format:test": "prettier \"projects/**/*.{ts,json,md,scss}\" --list-different",
+
+9 - Run app
+  npm start
+
+10- the architecture
+  https://medium.com/@tomastrajan/how-to-build-epic-angular-app-with-clean-architecture-91640ed1656
+
+11 - generate coremodule
+    ng g m core
+
+ add BrowserModule and BrowserAnimationsModule to the imports: [] array of the CoreModule while removing them from the AppModule and replacing them with the CoreModule itself.
+
+ The coremodule will be importing most of things needed from start to keep our AppModule almost empty
+
+ 12 - Create main layout
+  ng g c core/layout/main-layout
+
+  13 - generate feature module home
+  ng g m features/home --route home --module app.module.ts
+
+  * add last catch all (**) route
+  const routes: Routes = [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: 'home' // navigate to home if there was no route eg www.my-org.com
+    },
+    {
+      path: '**', // catch all route
+      redirectTo: 'home' // can redirect home or to dedicated "not found route"
+    }
+  ]
+
+14 - create shared module
+  ng g m shared
+declarables (components, directives and pipes) which we want to use in multiple lazy features
+components from libraries (vendor / material / your component framework)
