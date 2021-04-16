@@ -5,9 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { TagListComponent } from './tag-list/tag-list.component';
 import { RouterModule } from '@angular/router';
+import { SortableDirective } from './directive/sortable/sortable.directive';
 
 @NgModule({
-  declarations: [TagListComponent],
+  declarations: [TagListComponent, SortableDirective],
   imports: [
     // vendor
     CommonModule,
