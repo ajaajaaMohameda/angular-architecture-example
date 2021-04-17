@@ -30,7 +30,7 @@
       <tbody>
         <tr *ngFor="let person of people$ | async; let index=index">
 
-         <td (click)=goTo() [routerLink]="['/person', (((this.personService.page - 1) * this.personService.pageSize)+index) ]"><bi name="eye"></bi>
+         <td (click)=goTo() [routerLink]="['/person', (((this.personService.page - 1) * this.personService.pageSize)+index) + 1 ]"><bi name="eye"></bi>
  </td>
           <td>
             {{person.name}}

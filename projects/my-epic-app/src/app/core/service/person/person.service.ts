@@ -100,4 +100,11 @@ export class PersonService {
       map(res => res.body ? res.body['results']: null)
     ).toPromise();
   }
+
+  getOne(id: string): Observable<any> {
+    const uri = `people/${id}`
+      return this.communicatorService.get(uri).pipe(
+        map(res =>  res.body ? res.body: null)
+      )
+  }
 }

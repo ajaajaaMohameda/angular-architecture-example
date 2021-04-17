@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonService } from '../../../core/service/person/person.service';
+import { ActivatedRoute } from '@angular/router';
+import { Person } from '../../../core/model/person';
 
 @Component({
   selector: 'my-org-person-show',
@@ -7,7 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonShowComponent implements OnInit {
 
-  constructor() { }
+  person: Person;
+  constructor(private personService: PersonService, private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      const id = params['id'];
+      this.personService.getOne(id).subscribe(res => {
+        if(!res) return;
+        this.person = res;
+      })
+    })
+  }
 
   ngOnInit(): void {
   }

@@ -1,1 +1,96 @@
-<p>person-show works!</p>
+<div class="container mt-4">
+  <table class="table stripped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Height</th>
+        <th>Mass</th>
+        <th>Hair color</th>
+        <th>Skin color</th>
+        <th>Eye color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{person.name}}</td>
+        <td>{{person.height}}</td>
+        <td>{{person.mass}}</td>
+        <td>{{person.hair_color}}</td>
+        <td>{{person.skin_color}}</td>
+        <td>{{person.eye_color}}</td>
+      </tr>
+    </tbody>
+  </table>
+<table class="table stripped">
+      <thead>
+      <tr>
+        <th>Birth year</th>
+        <th>Gender</th>
+        <th>Home world</th>
+        <th>URL</th>
+        <th>Created</th>
+        <th>Edited</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{person.birth_year}}</td>
+        <td>{{person.gender}}</td>
+        <td><a href="{{person.homeworld}}">{{person.homeworld}}</a> </td>
+        <td> <a href="{{person.url}}">{{person.url}}</a></td>
+        <td>{{person.created | date}}</td>
+        <td>{{person.edited | date}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="row">
+    <div class="col">
+      <h4>Films</h4>
+          <ul class="list-group">
+      <li *ngFor="let film of person.films" class="list-group-item">
+        <h6>
+          <a href="{{film}}">{{film}}</a>
+        </h6>
+      </li>
+    </ul>
+    </div>
+
+    <div class="col">
+      <h4>Species</h4>
+          <ul class="list-group">
+      <li *ngFor="let specie of person.species" class="list-group-item">
+        <h6>
+          <a href="{{specie}}">{{specie}}</a>
+        </h6>
+      </li>
+    </ul>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h4>Vehicles</h4>
+    <ul class="list-group">
+      <li *ngFor="let vehicle of person.vehicles" class="list-group-item">
+        <h6>
+          <a href="{{vehicle}}">{{vehicle}}</a>
+        </h6>
+      </li>
+    </ul>
+    </div>
+
+    <div class="col">
+      <h4>Starships</h4>
+         <ul class="list-group">
+      <li *ngFor="let starship of person.starships" class="list-group-item">
+        <h6>
+          <a href="{{starship}}">{{starship}}</a>
+        </h6>
+      </li>
+    </ul>
+    </div>
+  </div>
+</div>
