@@ -64,3 +64,5 @@ ng g application my-epic-app --prefix my-org --style scss --routing
   ng g m shared
 declarables (components, directives and pipes) which we want to use in multiple lazy features
 components from libraries (vendor / material / your component framework)
+15 - add bootsrap
+ng add @ng-bootstrap/ng-bootstrap

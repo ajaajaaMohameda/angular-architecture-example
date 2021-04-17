@@ -1,1 +1,57 @@
-<p>person works!</p>
+<div class="container mt-4">
+  <form>
+    <div class="form-group form-inline">
+      Full text search: <input type="text"
+      class="form-control ml-2"
+      name="searchTerm" [(ngModel)]="personService.searchTerm">
+      <span class="ml-3" *ngIf="personService.loading$ |async">Loading...</span>
+    </div>
+<!-- myOrgSortable -->
+<!-- |'name' | 'height' | 'eye_color' | 'birth_year' -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+           <th scope="col">#</th>
+          <th  scope="col" myOrgSortable="name" (sort)="onSort($event)">
+            Name
+          </th>
+          <th scope="col"  myOrgSortable="height" (sort)="onSort($event)">
+            Height
+          </th>
+          <th  myOrgSortable="eye_color" (sort)="onSort($event)">
+            Eye color
+          </th>
+          <th  myOrgSortable="birth_year" (sort)="onSort($event)">
+            Birth year
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let person of people$ | async; let index=index">
+
+         <td (click)=goTo() [routerLink]="['/person', (((this.personService.page - 1) * this.personService.pageSize)+index) ]"><bi name="eye"></bi>
+ </td>
+          <td>
+            {{person.name}}
+          </td>
+          <td>
+            {{person.height}}
+          </td>
+          <td>
+            {{person.eye_color}}
+          </td>
+          <td>
+            {{person.birth_year}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+<!-- pagination-->
+
+<my-org-paginater
+ [collectionSize]="(total$ | async)!" [personService]="personService"
+>
+
+</my-org-paginater>

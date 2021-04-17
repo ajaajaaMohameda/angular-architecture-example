@@ -21,15 +21,17 @@ export interface SortEvent {
 })
 export class SortableDirective {
 
-  @Input() sortable: SortColumn = '';
+  @Input() myOrgSortable: SortColumn = '';
   @Input() direction: SortDirection = '';
   @Output() sort = new EventEmitter<SortEvent>();
-  constructor() { }
+  constructor() {
+    console.log("i am directive")
+   }
 
   rotate() {
     this.direction = rotate[this.direction];
 
-    this.sort.emit({column: this.sortable, direction: this.direction});
+    this.sort.emit({column: this.myOrgSortable, direction: this.direction});
   }
 
 }

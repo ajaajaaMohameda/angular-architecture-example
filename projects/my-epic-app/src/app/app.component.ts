@@ -10,9 +10,5 @@ export class AppComponent {
   title = 'my-epic-app';
 
   constructor(private personService: PersonService) {
-    this.personService.get().subscribe(res => {
-      console.log("the res", res);
-    })
-
   }
 }

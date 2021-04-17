@@ -75,10 +75,10 @@ export class PersonService {
     this._search$.next();
   }
 
-  private _search(): Observable<SearchResult> {
+  private async _search(): Promise<SearchResult> {
     const { sortColumn, sortDirection, pageSize, page, searchTerm } = this._state;
 
-    let people: Person[] = [];
+    let people: Person[] = await this.get();
     // 1. sort
     people = Helper.sort(people, sortColumn, sortDirection);
 
@@ -91,13 +91,13 @@ export class PersonService {
     // 3. paginate
     people = people.slice((page - 1) * pageSize, (page - 1) * pageSize + pageSize);
 
-    return of({ people, total });
+    return of({ people, total }).toPromise();
   }
 
-  get(): Observable<any> {
+  async get(): Promise<any> {
     const uri = 'people';
     return this.communicatorService.get(uri).pipe(
       map(res => res.body ? res.body['results']: null)
-    );
+    ).toPromise();
   }
 }
